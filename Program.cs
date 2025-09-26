@@ -4,14 +4,12 @@
     new("Cookie", 25)
 ];
 
-Poo pou = new(Console.ReadLine());
+Poo pou = new();
+foods.ForEach(food => pou.AddToAvailableFood(food));
 
-while (pou.Hp >= 0)
+while (pou.GetAlive())
 {
     pou.PrintStats();
     pou.Tick(foods);
 }
-
-
-Console.ReadLine();
 

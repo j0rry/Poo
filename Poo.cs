@@ -2,42 +2,74 @@ using System.Xml.Serialization;
 
 class Poo
 {
-    public int Hp = 100;
-    public int MaxHp = 100;
-    public int Hunger = 100;
-    string Name = "Pou";
+    public string Name;
+    int _hp = 100;
+    int _maxHp = 100;
+    int _hunger = 100;
 
+    List<Food> _availableFoods = new();
 
-    public Poo(string name)
+    public Poo()
     {
-        Name = name;
+        System.Console.WriteLine("What is your companion name?");
+        while (true)
+        {
+            Name = Console.ReadLine();
+            if (!string.IsNullOrWhiteSpace(Name))
+            {
+                break;
+            }
+            System.Console.WriteLine("Choice A Valid Name!");
+
+        }
+    }
+
+    public void AddToAvailableFood(Food food)
+    {
+        _availableFoods.Add(food);
     }
 
     public void Feed(Food food)
     {
-        Hunger += food.Hunger;
-        if (Hunger > 100)
+        _hunger += food.Hunger;
+        if (_hunger > 100)
         {
-            Hunger = 100;
+            _hunger = 100;
         }
     }
 
-    public void HungerTakeDamage()
+    bool IsAlive()
+    {
+        if (_hp <= 0)
+        {
+            return false;
+        }
+        else return true;
+    }
+
+    public bool GetAlive()
+    {
+        return IsAlive();
+    }
+
+    void HungerTakeDamage(int hungerDamage)
     {
 
-        if (Hunger <= 0)
+        if (_hunger <= 0)
         {
-            Hp -= 1;
+            _hp -= hungerDamage;
         }
         else
         {
-            Hunger -= 1;
+            _hunger -= hungerDamage;
+
         }
     }
 
+
     public void Tick(List<Food> foods)
     {
-        HungerTakeDamage();
+        HungerTakeDamage(20);
         System.Console.WriteLine("What do you want to do?\n1). Feed\n2). Play\n3). Pet");
         int choice;
         while (!int.TryParse(Console.ReadLine(), out choice)) return;
@@ -51,7 +83,7 @@ class Poo
         }
     }
 
-    public Food SelectFood(List<Food> foods)
+    Food SelectFood(List<Food> foods)
     {
         for (int i = 0; i < foods.Count; i++)
         {
@@ -69,7 +101,7 @@ class Poo
 
     public void PrintStats()
     {
-        System.Console.WriteLine($"{Name} HP: {Hp}, Hunger: {Hunger}");
+        System.Console.WriteLine($"{Name} HP: {_hp}, Hunger: {_hunger}");
     }
     
 }
