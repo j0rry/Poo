@@ -1,4 +1,3 @@
-using System.Xml.Serialization;
 
 class Poo
 {
@@ -14,7 +13,7 @@ class Poo
         System.Console.WriteLine("What is your companion name?");
         while (true)
         {
-            Name = Console.ReadLine();
+            Name = Console.ReadLine() ?? string.Empty;
             if (!string.IsNullOrWhiteSpace(Name))
             {
                 break;
@@ -96,12 +95,12 @@ class Poo
             System.Console.WriteLine("Choose a valid food");
         }
 
-        return foods[choice-1];
+        return foods[choice - 1];
     }
 
     public void PrintStats()
     {
         System.Console.WriteLine($"{Name} HP: {_hp}, Hunger: {_hunger}");
     }
-    
+
 }
