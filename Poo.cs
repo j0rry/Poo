@@ -7,7 +7,7 @@ class Poo
     int _hunger = 100;
 
     List<Food> _availableFoods = new();
-
+    // test
     public Poo()
     {
         System.Console.WriteLine("What is your companion name?");
