@@ -5,6 +5,7 @@ class Poo
     int _hp = 100;
     int _maxHp = 100;
     int _hunger = 100;
+    int _boredom = 0;
 
     List<Food> _availableFoods = new();
     // test
@@ -69,6 +70,7 @@ class Poo
     public void Tick(List<Food> foods)
     {
         HungerTakeDamage(20);
+        _boredom++;
         System.Console.WriteLine("What do you want to do?\n1). Feed\n2). Play\n3). Pet");
         int choice;
         while (!int.TryParse(Console.ReadLine(), out choice)) return;
